@@ -1,7 +1,7 @@
 package main
 
 import (
-	"files_export/svc/checkfile"
+	"backup_files_exporter/svc/checkfile"
 	"flag"
 	"fmt"
 	"log"
@@ -12,19 +12,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-/*
-	**
-
-	func main() {
-		info, err := checkfile.GetFileStat("file.yaml")
-		if err != nil {
-			fmt.Println("Error: ", err)
-			return
-		}
-		fmt.Println(info)
-
-}
-*/
 var mutex sync.Mutex // 用于保护并发访问metrics的锁
 
 func main() {

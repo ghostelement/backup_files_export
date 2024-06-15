@@ -1,4 +1,4 @@
-module files_export
+module backup_files_exporter
 
 go 1.21.9
 
