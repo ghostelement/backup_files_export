@@ -1,0 +1,12 @@
+- name: mysql
+  # 备份文件目录
+  fileDir: "/backup/mysql"
+  # 备份文件日期格式
+  fileDateFormat: "20060102"
+  # 备份文件类型
+  fileType: "sql" 
+- name: tidb
+  fileDir: "/backup/tidb"
+  fileDateFormat: "20060102"
+  # 无文件类型则适配所有文件包括目录
+  fileType: ""
