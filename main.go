@@ -28,11 +28,20 @@ func main() {
 		prometheus.GaugeOpts{
 			Namespace: "backup_file_monitor",
 			Name:      "today_files",
-			Help:      "The number of files matching the criteria for each job.",
+			Help:      "The number of DB backup files.",
+		},
+		[]string{"backup_name"},
+	)
+	fileSizeGauge := prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "backup_file_monitor",
+			Name:      "today_files_size",
+			Help:      "The size of DB backup files.",
 		},
 		[]string{"backup_name"},
 	)
 	reg.MustRegister(fileCountGauge)
+	reg.MustRegister(fileSizeGauge)
 
 	// 设置HTTP服务器
 	http.HandleFunc("/metrics", func(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +62,7 @@ func main() {
 		// 更新metrics
 		for _, cl := range *checkLists {
 			fileCountGauge.WithLabelValues(cl.Name).Set(float64(cl.Count))
+			fileSizeGauge.WithLabelValues(cl.Name).Set(float64(cl.Size))
 		}
 
 		// 使用自定义registry处理请求
