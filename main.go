@@ -57,9 +57,6 @@ func main() {
 		defer mutex.Unlock()
 
 		// 检查是否需要更新数据,防止频繁更新备份文件状态
-		fmt.Println(lastUpdated)
-		fmt.Println(time.Since(lastUpdated))
-		fmt.Println(expiration)
 		if time.Since(lastUpdated) > expiration {
 			var err error
 			checkLists, err = checkfile.GetFileStat(*configPath)
