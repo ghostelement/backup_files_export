@@ -6,8 +6,12 @@
 ## 用法
 通过指定的配置文件启动程序，暴露prometheus的监控指标。  
 ```sh
-backup_files_export --metrics.config=config.yaml --metrics.port=9103
+backup_files_export --metrics.config=config.yaml --metrics.port=9103 --metrics.interval=30
 ```
+metrics.config  监控配置文件  
+metrics.port  监控端口，默认9103  
+metrics.interval  监控获取指标的时间间隔(分钟)，默认缓存30分钟，不直接调用接口获取数据。  
+
 config.yaml配置文件示例：  
 ```yaml
 - name: mysql
